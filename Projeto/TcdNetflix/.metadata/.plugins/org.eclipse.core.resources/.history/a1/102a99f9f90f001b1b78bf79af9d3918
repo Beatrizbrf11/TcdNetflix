@@ -1,0 +1,125 @@
+package com.tcdNetflix.filmeusuarioservice.service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.tcdNetflix.filmeusuarioservice.entity.Filme;
+import com.tcdNetflix.filmeusuarioservice.entity.FilmeUsuario;
+import com.tcdNetflix.filmeusuarioservice.entity.Usuario;
+import com.tcdNetflix.filmeusuarioservice.repository.FilmeUsuarioRepository;
+import com.tcdNetflix.filmeusuarioservice.vo.FilmeUsuarioVO;
+
+@Service
+public class FilmeUsuarioService {
+
+	@Autowired
+	private DiscoveryClient discoveryClient;
+
+	@Autowired
+	private FilmeUsuarioRepository repository;
+
+	public List<FilmeUsuario> getFilmeUsuarioPorId(int idUsuario) {
+		List<FilmeUsuario> filmesUsuario = repository.findAllByIdUsuario(idUsuario);
+		return filmesUsuario;
+	}
+
+	public String Favoritar(FilmeUsuarioVO filmeUsuario) {
+
+		try {
+			ValidarUsuario(filmeUsuario.getIdUsuario());
+			ValidarFilme(filmeUsuario.getIdFilme());
+
+			FilmeUsuario entidade = repository.findByIdUsuarioAndIdFilme(filmeUsuario.getIdUsuario(),
+					filmeUsuario.getIdFilme());
+
+			if (entidade != null) {
+				entidade.setFavorito(!entidade.getFavorito());
+			} else {
+				entidade = new FilmeUsuario(filmeUsuario.getIdUsuario(), filmeUsuario.getIdFilme(),
+						true, false, false);
+			}
+
+			repository.save(entidade);
+
+			return "Favorito salvo com sucesso";
+
+		} catch (Exception ex) {
+			throw new RuntimeException("Erro ao salvar favorito: " + ex);
+		}
+	}
+
+	private void ValidarUsuario(int idUsuario) {
+		try {
+			getUsuario(idUsuario);
+		} catch (Exception ex) {
+			throw new RuntimeException("Usuario não existe");
+		}
+	}
+
+	private void ValidarFilme(int idFilme) {
+		try {
+			getFilme(idFilme);
+		} catch (Exception ex) {
+			throw new RuntimeException("Filme não existe");
+		}
+	}
+
+	private Usuario getUsuario(int id) {
+		RestTemplate restTemplate = new RestTemplate();
+		String uri = String.format("%s/v1/usuarioservice/usuario/%s", getServiceInstanceURI("usuarioservice"), id);
+		ResponseEntity<Usuario> restExchange = restTemplate.exchange(uri, HttpMethod.GET, null, Usuario.class, id);
+		return restExchange.getBody();
+	}
+
+	private Filme getFilme(int id) {
+		RestTemplate restTemplate = new RestTemplate();
+		String uri = String.format("%s/v1/filmeservice/%s", getServiceInstanceURI("filmeservice"), id);
+		ResponseEntity<Filme> restExchange = restTemplate.exchange(uri, HttpMethod.GET, null, Filme.class, id);
+		return restExchange.getBody();
+	}
+
+	private Filme[] getFilmes(List<Integer> ids) {
+		RestTemplate restTemplate = new RestTemplate();
+		String uri = String.format("%s/v1/filmeservice/filmes/", getServiceInstanceURI("filmeservice"));
+		ResponseEntity<Filme[]> restExchange = restTemplate.postForEntity(uri, ids, Filme[].class);
+		
+		return restExchange.getBody();
+	}
+
+	private String getServiceInstanceURI(String serviceName) {
+		List<ServiceInstance> instances = discoveryClient.getInstances(serviceName);
+		if (instances.size() == 0) {
+			throw new RuntimeException(serviceName);
+		} else {
+			return instances.get(0).getUri().toString();
+		}
+	}
+
+	public Filme Favoritos(int idUsuario) {
+
+		try {
+
+			List<FilmeUsuario> filmesUsuario = repository.findAllByIdUsuario(idUsuario);
+			List<Integer> idFilmes = new ArrayList<Integer>();
+			filmesUsuario.forEach((n) -> {
+				idFilmes.add(n.getIdFilme());
+			});
+
+			Filme teste = getFilmes(idFilmes);
+			return teste;
+						
+		} catch (Exception ex) {
+
+			throw new RuntimeException("Erro ao listar favoritos:" + ex.getMessage());
+		}
+	}
+}

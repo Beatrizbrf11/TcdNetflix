@@ -1,0 +1,5 @@
+package com.tcdNetflix.usuarioservice.repository;
+
+public interface UsuarioRepository {
+
+}

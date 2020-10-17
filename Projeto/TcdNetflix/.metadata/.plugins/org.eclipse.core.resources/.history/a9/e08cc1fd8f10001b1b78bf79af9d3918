@@ -1,0 +1,6 @@
+package com.tcdNetflix.filmeservice.service;
+
+@Service
+public class GeneroService {
+
+}

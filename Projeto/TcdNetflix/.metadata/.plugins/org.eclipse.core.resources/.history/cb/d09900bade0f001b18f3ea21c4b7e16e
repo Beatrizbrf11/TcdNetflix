@@ -1,0 +1,5 @@
+package com.tcdNetflix.filmeusuarioservice.vo;
+
+public class FilmeUsuarioVO {
+
+}

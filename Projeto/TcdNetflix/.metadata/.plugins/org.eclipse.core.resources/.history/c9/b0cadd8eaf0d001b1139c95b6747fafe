@@ -1,0 +1,5 @@
+package com.tcdNetflix.chamadoservice.service;
+
+public class ChamadoService {
+
+}

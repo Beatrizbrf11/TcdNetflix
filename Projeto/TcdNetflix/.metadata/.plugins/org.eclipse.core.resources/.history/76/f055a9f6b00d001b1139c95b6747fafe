@@ -1,0 +1,5 @@
+package ChamadoserviceApplication.cache;
+
+public class MySimpleCache {
+
+}

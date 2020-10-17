@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.lang.Boolean"/>
+    <fullyQualifiedTypeName name="antlr.collections.List"/>
+    <fullyQualifiedTypeName name="com.netflix.discovery.DiscoveryClient"/>
+    <fullyQualifiedTypeName name="org.slf4j.Logger"/>
+    <fullyQualifiedTypeName name="com.netflix.ribbon.proxy.annotation.Http.HttpMethod"/>
+    <fullyQualifiedTypeName name="javax.persistence.Entity"/>
+    <fullyQualifiedTypeName name="javax.persistence.Table"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpMethod"/>
+    <fullyQualifiedTypeName name="org.springframework.cloud.client.discovery.DiscoveryClient"/>
+    <fullyQualifiedTypeName name="com.tcdNetflix.chamadosservice.vo.UsuarioVO"/>
+    <fullyQualifiedTypeName name="org.hibernate.hql.internal.ast.tree.BooleanLiteralNode"/>
+    <fullyQualifiedTypeName name="javax.persistence.Id"/>
+    <fullyQualifiedTypeName name="com.tcdNetflix.filmeservice.entity.Genero"/>
+    <fullyQualifiedTypeName name="org.hibernate.annotations.CascadeType"/>
+    <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
+    <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
+    <fullyQualifiedTypeName name="com.tcdNetflix.filmeusuarioservice.entity.FilmeUsuario"/>
+    <fullyQualifiedTypeName name="com.tcdNetflix.filmeusuarioservice.entity.Filme"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.tcdNetflix.filmeservice.repository.FilmeRepository"/>
+    <fullyQualifiedTypeName name="com.tcdNetflix.filmeservice.entity.Filme"/>
+    <fullyQualifiedTypeName name="com.tcdNetflix.filmeservice.vo.GeneroVO"/>
+</qualifiedTypeNameHistroy>

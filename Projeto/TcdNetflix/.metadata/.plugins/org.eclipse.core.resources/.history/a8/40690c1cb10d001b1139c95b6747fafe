@@ -1,0 +1,10 @@
+package com.tcdNetflix.chamadoservice.repository;
+
+import com.tcdNetflix.chamadoservice.entity.Chamado;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public class ChamadoRepository extends JpaRepository<Chamado, Integer> {
+
+
+}

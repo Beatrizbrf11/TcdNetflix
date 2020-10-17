@@ -1,0 +1,39 @@
+package com.tcdNetflix.filmeusuarioservice.vo;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class FilmeUsuarioVO {
+
+	@JsonProperty("IdUsuario")
+	private int IdUsuario;
+
+	@JsonProperty("IdFilme")
+	private int IdFilme;
+	
+	@JsonProperty("Status")
+	private boolean Status;
+	
+	public int getIdUsuario() {
+		return IdUsuario;
+	}
+
+	public void setIdUsuario(int IdUsuario) {
+		this.IdUsuario = IdUsuario;
+	}
+
+	public int getIdFilme() {
+		return IdFilme;
+	}
+
+	public void setIdFilme(int IdFilme) {
+		this.IdFilme= IdFilme;
+	}
+	
+	public boolean getStatus() {
+		return Status;
+	}
+
+	public void setStatus(boolean Status) {
+		this.Status = Status;
+	}
+}

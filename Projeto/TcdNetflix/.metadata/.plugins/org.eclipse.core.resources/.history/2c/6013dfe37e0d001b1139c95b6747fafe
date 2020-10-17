@@ -1,0 +1,5 @@
+package com.tcdNetflix.filmeservice.repository;
+
+public interface GeneroRepository {
+
+}

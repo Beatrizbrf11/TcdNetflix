@@ -1,0 +1,91 @@
+package com.tcdNetflix.filmeusuarioservice.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@Entity
+@Table(name = "FilmeUsuario")
+public class FilmeUsuario {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonProperty("Id")
+	private int Id;
+
+	@JsonProperty("IdUsuario")
+	private int idUsuario;
+
+	@JsonProperty("IdFilme")
+	private int IdFilme;
+
+	@JsonProperty("Favorito")
+	private boolean Favorito;
+
+	@JsonProperty("JaVisto")
+	private boolean JaVisto;
+
+	@JsonProperty("VerDepois")
+	private boolean VerDepois;
+
+	public FilmeUsuario(int idUsuario, int IdFilme, boolean Favorito, boolean JaVisto, boolean VerDepois) {
+		super();
+		this.idUsuario = idUsuario;
+		this.IdFilme = IdFilme;
+		this.Favorito = Favorito;
+		this.JaVisto = JaVisto;
+		this.VerDepois = VerDepois;
+	}
+
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int Id) {
+		this.Id = Id;
+	}
+
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public int getIdFilme() {
+		return IdFilme;
+	}
+
+	public void setIdFilme(int IdFilme) {
+		this.IdFilme = IdFilme;
+	}
+
+	public boolean getFavorito() {
+		return Favorito;
+	}
+
+	public void setFavorito(boolean Favorito) {
+		this.Favorito = Favorito;
+	}
+
+	public boolean getJaVisto() {
+		return JaVisto;
+	}
+
+	public void setJaVisto(boolean JaVisto) {
+		this.JaVisto = JaVisto;
+	}
+
+	public boolean getVerDepois() {
+		return VerDepois;
+	}
+
+	public void setVerDepois(boolean VerDepois) {
+		this.VerDepois = VerDepois;
+	}
+}

@@ -1,0 +1,52 @@
+package com.tcdNetflix.filmeusuarioservice.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tcdNetflix.filmeusuarioservice.entity.Filme;
+import com.tcdNetflix.filmeusuarioservice.service.FilmeUsuarioService;
+import com.tcdNetflix.filmeusuarioservice.vo.FilmeUsuarioVO;
+
+@RestController
+@RequestMapping(value = "/v1/filmeusuarioservice")
+public class FilmeUsuarioController {
+
+	@Autowired
+	private FilmeUsuarioService service;
+	
+	@RequestMapping(value = "/favorito", method = RequestMethod.POST)
+	public String CriarFavorito(@RequestBody FilmeUsuarioVO filmeUsuario) {
+		return service.Favoritar(filmeUsuario);
+	}
+	
+	@RequestMapping(value = "/favorito/{idUsuario}",  method = RequestMethod.GET)
+	public List<Filme> ListarFavorito(@PathVariable(name = "idUsuario") int idUsuario) {
+		return service.Favoritos(idUsuario);
+	}
+
+	@RequestMapping(value = "/visto", method = RequestMethod.POST)
+	public String CriarJaVisto(@RequestBody FilmeUsuarioVO filmeUsuario) {
+		return service.CriarJaVisto(filmeUsuario);
+	}
+	
+	@RequestMapping(value = "/visto/{idUsuario}",  method = RequestMethod.GET)
+	public List<Filme> ListarJaVisto(@PathVariable(name = "idUsuario") int idUsuario) {
+		return service.ListarJaVisto(idUsuario);
+	}
+	
+	@RequestMapping(value = "/ver", method = RequestMethod.POST)
+	public String CriarVerDepois(@RequestBody FilmeUsuarioVO filmeUsuario) {
+		return service.CriarVerDepois(filmeUsuario);
+	}
+	
+	@RequestMapping(value = "/ver/{idUsuario}",  method = RequestMethod.GET)
+	public List<Filme> ListarVerDepois(@PathVariable(name = "idUsuario") int idUsuario) {
+		return service.ListarVerDepois(idUsuario);
+	}
+}

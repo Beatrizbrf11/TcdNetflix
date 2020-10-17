@@ -1,0 +1,47 @@
+package com.tcdNetflix.filmeservice.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tcdNetflix.filmeservice.entity.Filme;
+import com.tcdNetflix.filmeservice.repository.FilmeGeneroRepository;
+import com.tcdNetflix.filmeservice.repository.FilmeRepository;
+
+@Service
+public class FilmeService {
+
+	@Autowired
+	private FilmeRepository repository;
+
+	@Autowired
+	private FilmeGeneroRepository filmeGeneroRepository;
+
+	public Filme getFilmePorId(int id) {
+		try {
+			return repository.findById(id).get();
+		} catch (Exception ex) {
+			throw new RuntimeException("Erro ao buscar um filme: " + ex.getMessage());
+		}
+	}
+
+	public List<Filme> getFilmeByNome(String nome) {
+		List<Filme> filmes = repository.findAllByNomeContaining(nome);
+		return filmes;
+	}
+
+	public List<Filme> getFilmeByIdGenero(int idGenero) {
+		// List<Filme> filmes = repository.findByFilmeGeneros_IdGenero(idGenero);
+		// List<Filme> filmes = filmeGeneroRepository.findAllFilmeByIdGenero(idGenero);
+		// return filmes;
+		return null;
+	}
+
+	public List<Filme> getFilmeGeneroByIdGenero(int idGenero) {
+		// List<Filme> filmes = repository.findByFilmeGeneros_IdGenero(idGenero);
+		List<Filme> filmes = repository.findAllFilmeQuery(idGenero);
+		return filmes;
+		// return null;
+	}
+}

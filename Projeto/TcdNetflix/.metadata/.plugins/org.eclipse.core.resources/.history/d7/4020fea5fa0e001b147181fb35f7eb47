@@ -1,0 +1,84 @@
+package com.tcdNetflix.filmeservice.entity;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@Entity
+@Table(name = "filme_genero")
+public class FilmeGenero {
+
+	@Id
+	@JsonProperty("id")
+	private int id;
+
+	@JsonProperty("id_filme")
+	private int id_filme;
+
+	@JsonProperty("id_genero")
+	private int id_genero;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name = "id_filme", referencedColumnName = "id")
+	private Filme filme;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name = "id_genero", referencedColumnName = "id")
+	private Genero genero;
+
+	public FilmeGenero() {
+	}
+
+	public FilmeGenero(int id, int id_filme, int id_genero) {
+		super();
+		this.id = id;
+		this.id_filme = id_filme;
+		this.id_genero = id_genero;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getIdFilme() {
+		return id_filme;
+	}
+
+	public void setIdFilme(int id_filme) {
+		this.id_filme = id_filme;
+	}
+
+	public int getIdGenero() {
+		return id_genero;
+	}
+
+	public void setIdGenero(int id_genero) {
+		this.id_genero = id_genero;
+	}
+
+	public Filme getFilme() {
+		return filme;
+	}
+
+	public void setFilme(Filme filme) {
+		this.filme = filme;
+	}
+
+	public Genero getGenero() {
+		return genero;
+	}
+
+	public void setGenero(Genero genero) {
+		this.genero = genero;
+	}
+}

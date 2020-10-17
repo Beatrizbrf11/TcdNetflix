@@ -1,0 +1,8 @@
+package com.tcdNetflix.chamadoservice.repository;
+
+import com.tcdNetflix.chamadoservice.entity.Chamado;
+
+public class ChamadoRepository extends JpaRepository<Chamado, Integer> {
+
+
+}

@@ -1,0 +1,22 @@
+package com.tcdNetflix.filmeservice.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tcdNetflix.filmeservice.entity.Filme;
+import com.tcdNetflix.filmeservice.service.GeneroService;
+
+@RestController
+@RequestMapping(value = "/v1/generoservice")
+
+public class GeneroController {
+	@Autowired
+	private GeneroService service;
+
+	@RequestMapping(value = "/genero/", method = RequestMethod.GET)
+	public Filme List() {
+		return service.getGeneros();
+	}
+}

@@ -1,0 +1,22 @@
+server.port=8080
+#Service Discovery Configuration
+eureka.instance.preferIpAddress=true
+eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
+
+#Kafka Configuration
+spring.cloud.stream.bindings.input.binder=kafka
+spring.cloud.stream.bindings.input.destination=productEventTopic
+spring.cloud.stream.bindings.input.content-type=application/json
+spring.cloud.stream.bindings.input.group=input-group-1
+spring.cloud.stream.kafka.binder.zkNodes=localhost
+spring.cloud.stream.kafka.binder.brokers=localhost
+
+#H2 Database configuration
+spring.datasource.url=jdbc:mysql://localhost/orderdb?useTimezone=true&serverTimezone=UTC
+spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+spring.datasource.username=root
+spring.datasource.password=R@@t2020
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+spring.h2.console.enabled=true
+spring.h2.console.settings.trace=false
+spring.h2.console.settings.web-allow-others=false

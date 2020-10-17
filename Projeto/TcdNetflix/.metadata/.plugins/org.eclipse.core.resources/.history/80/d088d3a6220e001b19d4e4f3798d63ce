@@ -1,0 +1,17 @@
+package com.tcdNetflix.usuarioservice.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.tcdNetflix.usuarioservice.entity.Usuario;
+import com.tcdNetflix.usuarioservice.repository.UsuarioRepository;
+
+@Service
+public class UsuarioService {
+
+	@Autowired
+	private UsuarioRepository repository;
+	
+	public Usuario getUsuario(int idUsuario) {
+		return repository.findById(idUsuario).get();
+	}
+}

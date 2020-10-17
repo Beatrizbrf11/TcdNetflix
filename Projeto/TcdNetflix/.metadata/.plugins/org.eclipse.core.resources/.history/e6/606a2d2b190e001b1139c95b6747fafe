@@ -1,0 +1,5 @@
+package com.tcdNetflix.chamadosservice.vo;
+
+public class UsuarioVO {
+
+}

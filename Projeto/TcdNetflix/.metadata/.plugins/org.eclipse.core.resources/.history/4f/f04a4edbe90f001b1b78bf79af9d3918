@@ -1,0 +1,43 @@
+package com.tcdNetflix.filmeservice.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tcdNetflix.filmeservice.entity.Filme;
+import com.tcdNetflix.filmeservice.service.FilmeService;
+import com.tcdNetflix.filmeusuarioservice.vo.FilmeUsuarioVO;
+
+@RestController
+@RequestMapping(value = "/v1/filmeservice")
+public class FilmeController {
+	
+	@Autowired
+	private FilmeService service;
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Filme Detalhe(@PathVariable(name = "id") int id) {
+		return service.getFilmePorId(id);
+	}
+	
+	@RequestMapping(value = "/filme/{nome}", method = RequestMethod.GET)
+	public List<Filme> FiltrarPorNome(@PathVariable(name = "nome") String nome) {
+		return service.getFilmeByNome(nome);
+	}
+	
+	@RequestMapping(value = "/genero/{idGenero}", method = RequestMethod.GET)
+	public List<Filme> FiltrarPorGenero(@PathVariable(name = "idGenero") int idGenero) {
+		return service.getFilmeGeneroByIdGenero(idGenero);
+	}
+	
+
+	@RequestMapping(value = "/filmes/", method = RequestMethod.POST)
+	public List<Filme> Favoritos(@RequestBody List<Integer> ids) {
+		return service.getFilmes(ids);
+	}
+}

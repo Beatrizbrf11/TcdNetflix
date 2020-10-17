@@ -1,0 +1,5 @@
+package com.tcdNetflix.filmeservice.vo;
+
+public class GeneroVO {
+
+}

@@ -1,0 +1,31 @@
+package com.tcdNetflix.chamadoservice.cache;
+
+import java.util.HashMap;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.tcdNetflix.chamadoservice.entity.Chamado;
+
+public class MySimpleCache {
+	private static final Logger LOGGER = LoggerFactory.getLogger(MySimpleCache.class);
+	private final static HashMap<Integer, Chamado> PRODUCT_CACHE = new HashMap<Integer, Chamado>();
+
+	private MySimpleCache() {
+	}
+
+	public synchronized static Chamado get(Integer id) {
+		Chamado entidade = PRODUCT_CACHE.get(id);
+		if (entidade == null) {
+			LOGGER.info("cache miss for key: " + id);
+		} else {
+			LOGGER.info("cache hit for key:" + id);
+		}
+		return product;
+	}
+
+	public synchronized static void put(Chamado entidade) {
+		LOGGER.info("Insert/Udate key: " + entidade.getId() + " into cache");
+		PRODUCT_CACHE.put(entidade.getId(), entidade);
+	}
+}

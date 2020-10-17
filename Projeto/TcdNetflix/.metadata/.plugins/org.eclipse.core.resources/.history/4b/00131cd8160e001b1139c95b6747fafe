@@ -1,0 +1,5 @@
+package com.tcdNetflix.usuarioservice.controller;
+
+public class UsuarioController {
+
+}

@@ -1,0 +1,437 @@
+{
+	"info": {
+		"_postman_id": "4b77f9ef-1302-4794-a202-abb329232fc9",
+		"name": "TcdNetflix",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Buscar Usuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/v1/usuarioservice/usuario/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"usuarioservice",
+						"usuario",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criando chamado",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idUsuario\": 4,\r\n    \"titulo\": \"Criando um chamado\",\r\n    \"descricao\": \"Descricao do problema\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/chamadoservice/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"chamadoservice",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listando chamado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/chamadoservice/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"chamadoservice",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detalhe do filme",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8070/v1/filmeservice/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"v1",
+						"filmeservice",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscando por palavra chave",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8070/v1/filmeservice/filme/Chefão",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"v1",
+						"filmeservice",
+						"filme",
+						"Chefão"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar filme por genero",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8070/v1/filmeservice/genero/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"v1",
+						"filmeservice",
+						"genero",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de filmes por idsFilme",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[1,5,6,8]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8070/v1/filmeservice/filmes/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"v1",
+						"filmeservice",
+						"filmes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Favoritar um filme",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idUsuario\":1,\r\n    \"idFilme\":5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8060/v1/filmeusuarioservice/favorito",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8060",
+					"path": [
+						"v1",
+						"filmeusuarioservice",
+						"favorito"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar favoritos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8060/v1/filmeusuarioservice/favorito/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8060",
+					"path": [
+						"v1",
+						"filmeusuarioservice",
+						"favorito",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar já vistos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8060/v1/filmeusuarioservice/visto/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8060",
+					"path": [
+						"v1",
+						"filmeusuarioservice",
+						"visto",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Salvar já vistos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idUsuario\":3,\r\n    \"idFilme\":3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8060/v1/filmeusuarioservice/visto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8060",
+					"path": [
+						"v1",
+						"filmeusuarioservice",
+						"visto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Salvar para ver depois",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idUsuario\":1,\r\n    \"idFilme\":7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8060/v1/filmeusuarioservice/ver",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8060",
+					"path": [
+						"v1",
+						"filmeusuarioservice",
+						"ver"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar filmes para ver depois",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8060/v1/filmeusuarioservice/ver/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8060",
+					"path": [
+						"v1",
+						"filmeusuarioservice",
+						"ver",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de Filmes mais vistos dos generos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8070/v1/generoservice/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"v1",
+						"generoservice",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de filmes mais visto de uma determinada categoria",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8070/v1/filmeservice/genero/visto/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"v1",
+						"filmeservice",
+						"genero",
+						"visto",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Salvar para ver depois",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idUsuario\":3,\r\n    \"idFilme\":3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8060/v1/filmeusuarioservice/ver",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8060",
+					"path": [
+						"v1",
+						"filmeusuarioservice",
+						"ver"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar ver depois",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8060/v1/filmeusuarioservice/ver/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8060",
+					"path": [
+						"v1",
+						"filmeusuarioservice",
+						"ver",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

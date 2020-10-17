@@ -1,0 +1,18 @@
+package com.tcdNetflix.filmeservice.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.tcdNetflix.filmeservice.entity.Filme;
+
+public interface FilmeRepository extends JpaRepository<Filme, Integer> {
+
+	List<Filme> findAllByNomeContaining(String nome);
+
+	//List<Filme> findAllByIdGenero(int idGenero);
+		
+	//@Query(value = "SELECT f FROM Filme f JOIN FilmeGenero d ON f.id = d.idFilme where d.idGenero = ?1")
+	//List<Filme> findByFilmeGeneros_IdGenero(int idGenero);
+	
+}

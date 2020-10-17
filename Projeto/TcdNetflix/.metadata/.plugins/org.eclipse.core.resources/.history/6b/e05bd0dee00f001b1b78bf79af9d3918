@@ -1,0 +1,5 @@
+package com.tcdNetflix.filmeusuarioservice.cache;
+
+public class MySimpleCache {
+
+}

@@ -1,0 +1,16 @@
+package com.tcdNetflix.chamadoservice.service;
+
+import org.springframework.stereotype.Service;
+
+import com.tcdNetflix.chamadoservice.entity.Chamado;
+
+@Service
+//TODO @EnableBinding(Sink.class)
+public class ChamadoService {
+	
+	public boolean CriarChamado(Chamado chamado) {
+
+		return true;
+
+	}
+}

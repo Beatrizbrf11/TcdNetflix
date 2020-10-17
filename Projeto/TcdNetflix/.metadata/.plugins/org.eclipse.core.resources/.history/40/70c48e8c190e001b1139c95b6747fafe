@@ -1,0 +1,5 @@
+package com.tcdNetflix.chamadoservice.entity;
+
+public class Chamado {
+
+}

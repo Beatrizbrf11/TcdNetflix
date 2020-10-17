@@ -1,0 +1,14 @@
+package com.tcdNetflix.filmeusuarioservice.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.tcdNetflix.filmeusuarioservice.entity.FilmeUsuario;
+
+public interface FilmeUsuarioRepository extends JpaRepository<FilmeUsuario, Integer> {
+
+	List<FilmeUsuario> findAllByIdUsuarioByFavTrue(int IdUsuario);
+
+	FilmeUsuario findByIdUsuarioAndIdFilme(int idUsuario, int idFilme);
+}

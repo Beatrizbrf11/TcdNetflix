@@ -1,0 +1,54 @@
+package com.tcdNetflix.filmeusuarioservice.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tcdNetflix.filmeusuarioservice.entity.Filme;
+import com.tcdNetflix.filmeusuarioservice.service.FilmeUsuarioService;
+import com.tcdNetflix.filmeusuarioservice.vo.FilmeUsuarioVO;
+
+@RestController
+@RequestMapping(value = "/v1/filmeusuarioservice")
+public class FilmeUsuarioController {
+
+	@Autowired
+	private FilmeUsuarioService service;
+
+	@RequestMapping(value = "/favorito", method = RequestMethod.POST)
+	public ResponseEntity<?> CriarFavorito(@RequestBody FilmeUsuarioVO filmeUsuario) {
+		return new ResponseEntity<>( service.Favoritar(filmeUsuario, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/favorito/{idUsuario}", method = RequestMethod.GET)
+	public ResponseEntity<?> ListarFavorito(@PathVariable(name = "idUsuario") int idUsuario) {
+		return ResponseEntity.ok(service.Favoritos(idUsuario));
+	}
+
+	@RequestMapping(value = "/visto", method = RequestMethod.POST)
+	public ResponseEntity<?> CriarJaVisto(@RequestBody FilmeUsuarioVO filmeUsuario) {
+		return new ResponseEntity<>(service.CriarJaVisto(filmeUsuario, HttpStatus.OK));
+	}
+
+	@RequestMapping(value = "/visto/{idUsuario}", method = RequestMethod.GET)
+	public ResponseEntity<?> ListarJaVisto(@PathVariable(name = "idUsuario") int idUsuario) {
+		return ResponseEntity.ok(service.ListarJaVisto(idUsuario));
+	}
+
+	@RequestMapping(value = "/ver", method = RequestMethod.POST)
+	public ResponseEntity<?> CriarVerDepois(@RequestBody FilmeUsuarioVO filmeUsuario) {
+		return new ResponseEntity<>( service.CriarVerDepois(filmeUsuario, HttpStatus.OK));
+	}
+
+	@RequestMapping(value = "/ver/{idUsuario}", method = RequestMethod.GET)
+	public ResponseEntity<?> ListarVerDepois(@PathVariable(name = "idUsuario") int idUsuario) {
+		return ResponseEntity.ok(service.ListarVerDepois(idUsuario));
+	}
+}

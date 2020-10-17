@@ -1,0 +1,22 @@
+package com.tcdNetflix.chamadoservice.service;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.apache.tomcat.util.net.WriteBuffer.Sink;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tcdNetflix.chamadoservice.entity.Chamado;
+
+
+@Service
+@EnableBinding(Sink.class)
+public class ChamadoService {
+	
+	@Autowired
+	private DiscoveryClient discoveryClient;
+
+	public boolean CriarChamado(Chamado chamado) {
+
+		return true;
+
+	}
+}

@@ -1,0 +1,15 @@
+package com.tcdNetflix.filmeusuarioservice.vo;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class FilmeUsuarioVO {
+
+	@JsonProperty("idUsuario")
+	private int idUsuario;
+
+	@JsonProperty("idFilme")
+	private int idFilme;
+	
+	@JsonProperty("status")
+	private boolean status;
+}

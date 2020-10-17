@@ -1,0 +1,38 @@
+package com.tcdNetflix.filmeservice.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tcdNetflix.filmeservice.entity.Filme;
+import com.tcdNetflix.filmeservice.entity.Genero;
+import com.tcdNetflix.filmeservice.repository.FilmeRepository;
+import com.tcdNetflix.filmeservice.repository.GeneroRepository;
+import com.tcdNetflix.filmeservice.vo.GeneroVO;
+
+@Service
+public class GeneroService {
+
+	@Autowired
+	private GeneroRepository repository;
+
+	@Autowired
+	private FilmeRepository filmeRepository;
+
+	public List<GeneroVO> getGeneros() {
+		List<Genero> generos = repository.findAll();
+		List<GeneroVO> retorno = new ArrayList<GeneroVO>();
+		
+		for(Genero item : generos){
+			List<Filme> filmes  = filmeRepository.findByIdGenero(item.getId());
+
+			GeneroVO generoVO = new GeneroVO();
+			generoVO.setNome(item.getNome());
+			generoVO.setDescricao(item.getDescricao());
+			generoVO.setFilmes(filmes);
+        }
+		return retorno;
+	}
+}
