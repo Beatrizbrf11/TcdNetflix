@@ -36,7 +36,7 @@ public class FilmeController {
 	}
 
 	@RequestMapping(value = "/filmes", method = RequestMethod.POST)
-	public ResponseEntity<?> Favoritos(@RequestBody List<Integer> ids) {
+	public ResponseEntity<?> ListarFilmes(@RequestBody List<Integer> ids) {
 		return new ResponseEntity<>(service.getFilmes(ids), HttpStatus.OK);
 	}
 
