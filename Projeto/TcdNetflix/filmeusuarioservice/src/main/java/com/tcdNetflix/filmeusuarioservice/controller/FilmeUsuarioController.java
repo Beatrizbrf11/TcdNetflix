@@ -1,6 +1,7 @@
 package com.tcdNetflix.filmeusuarioservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tcdNetflix.filmeusuarioservice.service.FilmeUsuarioService;
 import com.tcdNetflix.filmeusuarioservice.vo.FilmeUsuarioVO;
 
+@RefreshScope
 @RestController
 @RequestMapping(value = "/v1/filmeusuarioservice")
 public class FilmeUsuarioController {

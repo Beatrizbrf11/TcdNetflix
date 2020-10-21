@@ -1,6 +1,7 @@
 package com.tcdNetflix.filmeservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tcdNetflix.filmeservice.service.GeneroService;
 
+@RefreshScope
 @RestController
 @RequestMapping(value = "/v1/generoservice")
 

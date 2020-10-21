@@ -3,6 +3,7 @@ package com.tcdNetflix.chamadoservice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import com.tcdNetflix.chamadoservice.entity.Chamado;
 import com.tcdNetflix.chamadoservice.service.ChamadoService;
 import com.tcdNetflix.chamadosservice.vo.ChamadoVO;
 
+@RefreshScope
 @RestController
 @RequestMapping(value = "/v1/chamadoservice")
 public class ChamadoController {
