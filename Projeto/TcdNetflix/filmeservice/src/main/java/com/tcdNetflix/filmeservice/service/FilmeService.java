@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.cloud.stream.messaging.Sink;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -12,6 +16,7 @@ import com.tcdNetflix.filmeservice.entity.Filme;
 import com.tcdNetflix.filmeservice.repository.FilmeRepository;
 
 @Service
+@EnableBinding(Sink.class)
 public class FilmeService {
 
 	@Autowired
@@ -81,5 +86,10 @@ public class FilmeService {
 	public List<Filme> getFilmeGeneroMaisVistosByIdGenero(int idGenero) {
 		List<Filme> filmes = repository.findAllFilmeOrderByDescQuery(idGenero);
 		return filmes;
+	}
+	
+	@StreamListener(target = Sink.INPUT)
+	public void consumerUsuarioFilme(@Payload Filme event) {
+		System.out.println("Filme já visto {} " + event.getNome());
 	}
 }

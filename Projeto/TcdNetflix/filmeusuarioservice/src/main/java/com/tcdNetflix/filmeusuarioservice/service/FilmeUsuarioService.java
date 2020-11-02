@@ -7,11 +7,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.mysql.cj.MessageBuilder;
 import com.tcdNetflix.filmeusuarioservice.entity.Filme;
 import com.tcdNetflix.filmeusuarioservice.entity.FilmeUsuario;
 import com.tcdNetflix.filmeusuarioservice.entity.Usuario;
@@ -19,6 +22,7 @@ import com.tcdNetflix.filmeusuarioservice.repository.FilmeUsuarioRepository;
 import com.tcdNetflix.filmeusuarioservice.vo.FilmeUsuarioVO;
 
 @Service
+@EnableBinding(Source.class)
 public class FilmeUsuarioService {
 
 	@Autowired
@@ -26,6 +30,9 @@ public class FilmeUsuarioService {
 
 	@Autowired
 	private FilmeUsuarioRepository repository;
+
+	@Autowired
+	private Source source;
 
 	private void ValidarUsuario(int idUsuario) {
 		try {
@@ -66,9 +73,8 @@ public class FilmeUsuarioService {
 	}
 
 	private void setFilmeVisto(int idFilme) {
-		RestTemplate restTemplate = new RestTemplate();
-		String uri = String.format("%s/v1/filmeservice/visto/%s", getServiceInstanceURI("filmeservice"), idFilme);
-		restTemplate.exchange(uri, HttpMethod.PUT, null, Filme.class, idFilme);
+		Filme filme = getFilme(idFilme);
+		source.output().send(org.springframework.integration.support.MessageBuilder.withPayload(filme).build());
 	}
 
 	private String getServiceInstanceURI(String serviceName) {
@@ -90,7 +96,12 @@ public class FilmeUsuarioService {
 					filmeUsuario.getIdFilme());
 
 			if (entidade != null) {
-				entidade.setFavorito(!entidade.getFavorito());
+				if (entidade.getFavorito() == true) {
+					return "Filme já favoritado por este usuário.";
+				} else {
+					entidade = new FilmeUsuario(filmeUsuario.getIdUsuario(), filmeUsuario.getIdFilme(), true, false,
+							false);
+				}
 			} else {
 				entidade = new FilmeUsuario(filmeUsuario.getIdUsuario(), filmeUsuario.getIdFilme(), true, false, false);
 			}
@@ -130,9 +141,13 @@ public class FilmeUsuarioService {
 
 			FilmeUsuario entidade = repository.findByIdUsuarioAndIdFilme(filmeUsuario.getIdUsuario(),
 					filmeUsuario.getIdFilme());
-
 			if (entidade != null) {
-				return "Filme já foi marcado como visto";
+				if (entidade.getJaVisto() == true) {
+					return "Filme já foi marcado como visto";
+				} else {
+					entidade = new FilmeUsuario(filmeUsuario.getIdUsuario(), filmeUsuario.getIdFilme(), false, true,
+							false);
+				}
 			} else {
 				entidade = new FilmeUsuario(filmeUsuario.getIdUsuario(), filmeUsuario.getIdFilme(), false, true, false);
 			}
@@ -150,7 +165,6 @@ public class FilmeUsuarioService {
 
 	public List<Filme> ListarJaVisto(int idUsuario) {
 		try {
-
 			List<FilmeUsuario> filmesUsuario = repository.findAllByIdUsuarioAndJaVistoTrue(idUsuario);
 			List<Integer> idFilmes = new ArrayList<Integer>();
 			filmesUsuario.forEach((n) -> {
@@ -175,7 +189,12 @@ public class FilmeUsuarioService {
 					filmeUsuario.getIdFilme());
 
 			if (entidade != null) {
-				entidade.setVerDepois(!entidade.getVerDepois());
+				if (entidade.getVerDepois() == true) {
+					return "Filme já foi marcado como ver depois";
+				} else {
+					entidade = new FilmeUsuario(filmeUsuario.getIdUsuario(), filmeUsuario.getIdFilme(), false, false,
+							true);
+				}
 			} else {
 				entidade = new FilmeUsuario(filmeUsuario.getIdUsuario(), filmeUsuario.getIdFilme(), false, false, true);
 			}
@@ -191,7 +210,6 @@ public class FilmeUsuarioService {
 
 	public List<Filme> ListarVerDepois(int idUsuario) {
 		try {
-
 			List<FilmeUsuario> filmesUsuario = repository.findAllByIdUsuarioAndVerDepoisTrue(idUsuario);
 			List<Integer> idFilmes = new ArrayList<Integer>();
 			filmesUsuario.forEach((n) -> {
